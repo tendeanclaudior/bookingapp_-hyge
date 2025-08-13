@@ -1,6 +1,9 @@
 import { Button, Gap, InputText } from "@/components";
+import { signinSchema, SignInSchemaType } from "@/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "expo-router";
 import React from "react";
+import { Controller, useForm } from "react-hook-form";
 import {
   SafeAreaView,
   ScrollView,
@@ -11,6 +14,17 @@ import {
 } from "react-native";
 
 const SignIn = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInSchemaType>({ resolver: zodResolver(signinSchema) });
+
+  const onSubmit = (data: SignInSchemaType) => {
+    console.log("Form data:", data);
+    // TODO: Kirim ke API / proses register
+  };
+
   return (
     <SafeAreaView style={styles.page}>
       <StatusBar barStyle={"dark-content"} />
@@ -26,17 +40,42 @@ const SignIn = () => {
 
             <Gap height={25} />
 
-            <InputText label={"Email"} placeholder={"Enter your email..."} />
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { onChange, value } }) => (
+                <InputText
+                  label={"Email"}
+                  placeholder={"Enter your email..."}
+                  value={value}
+                  onChangeText={onChange}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  error={errors?.email ? true : false}
+                  errorMessage={errors?.email?.message}
+                />
+              )}
+            />
 
-            <InputText
-              label={"Password"}
-              secureTextEntry
-              placeholder={"Enter your password..."}
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { onChange, value } }) => (
+                <InputText
+                  label={"Password"}
+                  secureTextEntry
+                  placeholder={"Enter your password..."}
+                  value={value}
+                  onChangeText={onChange}
+                  error={errors?.password ? true : false}
+                  errorMessage={errors?.password?.message}
+                />
+              )}
             />
 
             <Gap height={50} />
 
-            <Button title={"Login"} onPress={() => console.log("Login")} />
+            <Button title={"Login"} onPress={handleSubmit(onSubmit)} />
           </View>
 
           <View style={{ alignItems: "center" }}>

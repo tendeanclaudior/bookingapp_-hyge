@@ -13,7 +13,13 @@ import {
 import ButtonIcon from "./ButtonIcon";
 import Gap from "./Gap";
 
-const InputText = ({ label, secureTextEntry, ...props }: InputFieldProps) => {
+const InputText = ({
+  label,
+  secureTextEntry,
+  error,
+  errorMessage,
+  ...props
+}: InputFieldProps) => {
   const [focus, setFocus] = useState(false);
   const [securePassword, setSecurePassword] = useState(true);
 
@@ -71,6 +77,8 @@ const InputText = ({ label, secureTextEntry, ...props }: InputFieldProps) => {
               )}
             </View>
           </View>
+
+          {error && <Text style={styles.errorTitle}>{errorMessage}</Text>}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -96,5 +104,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "Jakarta-SemiBold",
     color: "#14151A",
+  },
+  errorTitle: {
+    color: "#E14434",
+    fontSize: 12,
+    marginTop: 4,
   },
 });

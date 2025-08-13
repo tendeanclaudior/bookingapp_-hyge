@@ -3,6 +3,8 @@ import { TextInputProps, TouchableOpacityProps } from "react-native";
 declare interface InputFieldProps extends TextInputProps {
   label: string;
   secureTextEntry?: boolean;
+  error?: boolean;
+  errorMessage?: string;
 }
 
 declare interface ButtonProps extends TouchableOpacityProps {
