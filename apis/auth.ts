@@ -5,44 +5,52 @@ import { router } from "expo-router";
 import { Alert } from "react-native";
 
 export const signUp = async (data: SignUpSchemaType) => {
-  const response = await fetchAPIAxios(`${apiUrl}/auth/register`, {
-    method: "post",
-    data: {
-      name: data?.name,
-      email: data?.email,
-      password: data?.password,
-    },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await fetchAPIAxios(`${apiUrl}/auth/register`, {
+      method: "post",
+      data: {
+        name: data?.name,
+        email: data?.email,
+        password: data?.password,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (response?.message === "User registered successfully") {
-    await AsyncStorage.setItem("token", response?.accessToken);
+    if (response?.message === "User registered successfully") {
+      await AsyncStorage.setItem("token", response?.accessToken);
 
-    router.push("/(root)/(tabs)/Home");
-  } else {
-    Alert.alert(response?.data?.error, response?.data?.message);
+      router.push("/(root)/(tabs)/Home");
+    } else {
+      Alert.alert(response?.data?.error, response?.data?.message);
+    }
+  } catch (error: any) {
+    Alert.alert("Error", error?.message);
   }
 };
 
 export const signIn = async (data: SignInSchemaType) => {
-  const response = await fetchAPIAxios(`${apiUrl}/auth/login`, {
-    method: "post",
-    data: {
-      email: data?.email,
-      password: data?.password,
-    },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await fetchAPIAxios(`${apiUrl}/auth/login`, {
+      method: "post",
+      data: {
+        email: data?.email,
+        password: data?.password,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (response?.message === "User registered successfully") {
-    await AsyncStorage.setItem("token", response?.accessToken);
+    if (response?.message === "User registered successfully") {
+      await AsyncStorage.setItem("token", response?.accessToken);
 
-    router.push("/(root)/(tabs)/Home");
-  } else {
-    Alert.alert(response?.data?.error, response?.data?.message);
+      router.push("/(root)/(tabs)/Home");
+    } else {
+      Alert.alert(response?.data?.error, response?.data?.message);
+    }
+  } catch (error: any) {
+    Alert.alert("Error", error?.message);
   }
 };
