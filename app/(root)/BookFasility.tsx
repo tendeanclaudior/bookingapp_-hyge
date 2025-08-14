@@ -1,14 +1,14 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 
-const Booking = () => {
+const BookFasility = () => {
   return (
     <SafeAreaView>
-      <Text>Booking</Text>
+      <Text>BookFasility</Text>
     </SafeAreaView>
   );
 };
 
-export default Booking;
+export default BookFasility;
 
 const styles = StyleSheet.create({});

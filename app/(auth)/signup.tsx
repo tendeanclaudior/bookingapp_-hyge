@@ -1,8 +1,9 @@
+import { signUp } from "@/apis";
 import { Button, ButtonIcon, Gap, InputText } from "@/components";
 import { signupSchema, SignUpSchemaType } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
-import React from "react";
+import React, { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   SafeAreaView,
@@ -22,10 +23,9 @@ const SignUp = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = (data: SignUpSchemaType) => {
-    console.log("Form data:", data);
-    // TODO: Kirim ke API / proses register
-  };
+  const onSubmit = useCallback((data: SignUpSchemaType) => {
+    signUp(data);
+  }, []);
 
   return (
     <SafeAreaView style={styles.page}>
