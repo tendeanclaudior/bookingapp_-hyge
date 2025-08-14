@@ -2,7 +2,7 @@ import { ButtonIconProps } from "@/types/components";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
-import { EyeIcon, EyeSlashIcon } from "react-native-heroicons/solid";
+import { EyeIcon, EyeSlashIcon, UserIcon } from "react-native-heroicons/solid";
 
 const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
   const Icon = () => {
@@ -25,6 +25,12 @@ const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
             <ArrowLeftIcon size={24} color={"#14151A"} />
           </View>
         );
+      case "profile":
+        return (
+          <View style={styles.profileView}>
+            <UserIcon size={20} color={"#FFFFFF"} />
+          </View>
+        );
 
       default:
         return null;
@@ -44,6 +50,14 @@ const styles = StyleSheet.create({
   backView: {
     width: 30,
     height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  profileView: {
+    backgroundColor: "#14151A",
+    width: 30,
+    height: 30,
+    borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",
   },

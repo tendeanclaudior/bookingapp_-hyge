@@ -43,7 +43,7 @@ export const signIn = async (data: SignInSchemaType) => {
       },
     });
 
-    if (response?.message === "User registered successfully") {
+    if (response?.message === "Login successful") {
       await AsyncStorage.setItem("token", response?.accessToken);
 
       router.push("/(root)/(tabs)/Home");
