@@ -1,12 +1,18 @@
 import { useGetUser } from "@/apis";
 import { ButtonIcon } from "@/components";
 import { sliceTitleView } from "@/utils";
-import { router } from "expo-router";
-import React from "react";
+import { router, useFocusEffect } from "expo-router";
+import React, { useCallback } from "react";
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 
 const Home = () => {
-  const { data } = useGetUser();
+  const { data, refetch } = useGetUser();
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
 
   return (
     <SafeAreaView style={styles.page}>

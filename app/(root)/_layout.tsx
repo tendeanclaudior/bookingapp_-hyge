@@ -12,6 +12,10 @@ const Layout = () => {
         name="Profile"
         options={{ headerShown: false, gestureEnabled: false }}
       />
+      <Stack.Screen
+        name="EditProfile"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
     </Stack>
   );
 };

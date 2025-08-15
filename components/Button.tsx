@@ -1,9 +1,17 @@
 import React from "react";
 import { ButtonProps, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const Button = ({ title, ...props }: ButtonProps) => {
+const Button = ({ title, disabled, ...props }: ButtonProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.7} style={styles.buttonView} {...props}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={[
+        styles.buttonView,
+        { backgroundColor: disabled ? "#AAAAAA" : "#14151A" },
+      ]}
+      disabled={disabled}
+      {...props}
+    >
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );
@@ -15,7 +23,6 @@ const styles = StyleSheet.create({
   buttonView: {
     width: "100%",
     padding: 10,
-    backgroundColor: "#14151A",
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
