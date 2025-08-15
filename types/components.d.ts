@@ -23,6 +23,8 @@ declare interface ButtonIconProps {
 }
 
 declare interface HeaderProps {
+  mainHeader?: boolean;
+  titleMain?: string;
   globalHeader: boolean;
   titleGlobal?: string;
 }

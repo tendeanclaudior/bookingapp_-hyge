@@ -4,9 +4,22 @@ import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ButtonIcon from "./ButtonIcon";
 
-const Header = ({ globalHeader, titleGlobal }: HeaderProps) => {
+const Header = ({
+  mainHeader,
+  titleMain,
+  globalHeader,
+  titleGlobal,
+}: HeaderProps) => {
   return (
     <>
+      {mainHeader && (
+        <View style={styles.headerMainView}>
+          <View style={styles.titleMainView}>
+            <Text style={styles.titleMain}>{titleMain}</Text>
+          </View>
+        </View>
+      )}
+
       {globalHeader && (
         <View style={styles.headerGlobalView}>
           <ButtonIcon icon={"back"} onPress={() => router.back()} />
@@ -23,6 +36,21 @@ const Header = ({ globalHeader, titleGlobal }: HeaderProps) => {
 export default memo(Header);
 
 const styles = StyleSheet.create({
+  headerMainView: {
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+  },
+  titleMainView: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  titleMain: {
+    fontSize: 18,
+    fontFamily: "Poppins-SemiBold",
+    color: "#14151A",
+    textTransform: "capitalize",
+  },
   headerGlobalView: {
     flexDirection: "row",
     justifyContent: "space-between",
