@@ -7,6 +7,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
+import { getRefreshToken } from "./global";
 
 export const useGetUser = <T = any>() => {
   const [data, setData] = useState<T | null>(null);
@@ -25,8 +26,12 @@ export const useGetUser = <T = any>() => {
         },
       });
 
-      setData(response?.user);
-      setLoading(false);
+      if (response?.data?.statusCode === 401) {
+        getRefreshToken();
+      } else {
+        setData(response?.user);
+        setLoading(false);
+      }
     } catch (err: any) {
       setLoading(false);
       setData(null);

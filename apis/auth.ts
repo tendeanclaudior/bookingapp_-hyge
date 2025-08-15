@@ -20,6 +20,7 @@ export const signUp = async (data: SignUpSchemaType) => {
 
     if (response?.message === "User registered successfully") {
       await AsyncStorage.setItem("token", response?.accessToken);
+      await AsyncStorage.setItem("refreshToken", response?.refreshToken);
 
       router.replace("/(root)/(tabs)/Home");
     } else {
@@ -45,6 +46,7 @@ export const signIn = async (data: SignInSchemaType) => {
 
     if (response?.message === "Login successful") {
       await AsyncStorage.setItem("token", response?.accessToken);
+      await AsyncStorage.setItem("refreshToken", response?.refreshToken);
 
       router.replace("/(root)/(tabs)/Home");
     } else {
@@ -67,7 +69,7 @@ export const logout = async () => {
     if (response?.message === "Logged out successfully") {
       router.replace("/(auth)/signin");
 
-      await AsyncStorage.multiRemove(["token"]);
+      await AsyncStorage.multiRemove(["token", "refreshToken"]);
     } else {
       Alert.alert(response?.message);
     }
