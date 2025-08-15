@@ -1,5 +1,5 @@
 import { ButtonIconProps } from "@/types/components";
-import React from "react";
+import React, { memo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {
   ArrowLeftIcon,
@@ -83,7 +83,7 @@ const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
   );
 };
 
-export default ButtonIcon;
+export default memo(ButtonIcon);
 
 const styles = StyleSheet.create({
   backView: {

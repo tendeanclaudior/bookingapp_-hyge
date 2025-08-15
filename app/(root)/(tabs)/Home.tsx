@@ -1,17 +1,31 @@
-import { useGetUser } from "@/apis";
-import { ButtonIcon } from "@/components";
-import { sliceTitleView } from "@/utils";
+import { useGetFacilities, useGetUser } from "@/apis";
+import {
+  ButtonIcon,
+  CardFasilities,
+  CardHeaderFasilities,
+  Gap,
+  InputSearch,
+} from "@/components";
 import { router, useFocusEffect } from "expo-router";
 import React, { useCallback } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from "react-native";
 
 const Home = () => {
-  const { data, refetch } = useGetUser();
+  const { data: dataUser, refetch: refetchUser } = useGetUser();
+  const { data: dataFacilities } = useGetFacilities<
+    CardFasilitiesProps[] | null
+  >();
 
   useFocusEffect(
     useCallback(() => {
-      refetch();
-    }, [refetch])
+      refetchUser();
+    }, [refetchUser])
   );
 
   return (
@@ -20,15 +34,27 @@ const Home = () => {
 
       <View style={styles.container}>
         <View style={styles.headerView}>
-          <Text style={styles.titleWelcome}>
-            Welcome, {sliceTitleView(data?.name, 15)} 👋
-          </Text>
+          <InputSearch placeholder={"Search fasilities"} />
 
           <ButtonIcon
             icon={"profile"}
             onPress={() => router.navigate("/(root)/Profile")}
           />
         </View>
+
+        <Gap height={10} />
+
+        <FlatList
+          data={dataFacilities! || []}
+          keyExtractor={(item, index) => `${item?.id}_${index}`}
+          contentContainerStyle={{ paddingVertical: 10 }}
+          renderItem={({ item }) => (
+            <CardFasilities item={item} onPress={() => console.log("")} />
+          )}
+          ListHeaderComponent={() => (
+            <CardHeaderFasilities name={dataUser?.name} />
+          )}
+        />
       </View>
     </SafeAreaView>
   );
@@ -50,10 +76,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  titleWelcome: {
-    fontSize: 20,
-    fontFamily: "Poppins-Medium",
-    color: "#14151A",
   },
 });

@@ -26,3 +26,7 @@ declare interface HeaderProps {
   globalHeader: boolean;
   titleGlobal?: string;
 }
+
+declare interface InputSearchProps extends TextInputProps {
+  placeholder?: string;
+}

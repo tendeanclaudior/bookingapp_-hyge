@@ -55,12 +55,17 @@ const Layout = () => {
                   width: 60,
                   height: 60,
                   borderRadius: 100,
-                  backgroundColor: "#65AEFF",
+                  backgroundColor: "#FFFFFF",
                   alignItems: "center",
                   justifyContent: "center",
+                  shadowColor: "#000000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.5,
+                  shadowRadius: 2,
+                  elevation: 2,
                 }}
               >
-                <PlusIcon size={30} color={"#FFFFFF"} />
+                <PlusIcon size={30} color={"#2D2E30"} />
               </View>
             </TouchableOpacity>
           ),

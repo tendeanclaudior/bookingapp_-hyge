@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { ButtonProps, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 const Button = ({ title, disabled, ...props }: ButtonProps) => {
@@ -17,7 +17,7 @@ const Button = ({ title, disabled, ...props }: ButtonProps) => {
   );
 };
 
-export default Button;
+export default memo(Button);
 
 const styles = StyleSheet.create({
   buttonView: {

@@ -1,5 +1,5 @@
 import { InputFieldProps } from "@/types/components";
-import React, { useCallback, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -85,7 +85,7 @@ const InputText = ({
   );
 };
 
-export default InputText;
+export default memo(InputText);
 
 const styles = StyleSheet.create({
   inputView: {

@@ -1,6 +1,6 @@
 import { HeaderProps } from "@/types/components";
 import { router } from "expo-router";
-import React from "react";
+import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ButtonIcon from "./ButtonIcon";
 
@@ -20,7 +20,7 @@ const Header = ({ globalHeader, titleGlobal }: HeaderProps) => {
   );
 };
 
-export default Header;
+export default memo(Header);
 
 const styles = StyleSheet.create({
   headerGlobalView: {
