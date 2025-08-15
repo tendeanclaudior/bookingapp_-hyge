@@ -5,11 +5,14 @@ import {
   CardHeaderFasilities,
   Gap,
   InputSearch,
+  NoData,
 } from "@/components";
+import { useFasilitiesStore } from "@/store";
 import { router, useFocusEffect } from "expo-router";
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import {
   FlatList,
+  Keyboard,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -18,14 +21,51 @@ import {
 
 const Home = () => {
   const { data: dataUser, refetch: refetchUser } = useGetUser();
-  const { data: dataFacilities } = useGetFacilities<
-    CardFasilitiesProps[] | null
-  >();
+  const {
+    data: dataFacilities,
+    loading: loadingFacilities,
+    refetch: refetchFasilities,
+  } = useGetFacilities<CardFasilitiesProps[] | null>();
+  const {
+    searchFasilities,
+    setSearchFasilities,
+    isSearchFasilities,
+    setIsSearchFasilities,
+  } = useFasilitiesStore();
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useFocusEffect(
     useCallback(() => {
       refetchUser();
     }, [refetchUser])
+  );
+
+  const handleSearchFacilities = useCallback(
+    (type: string) => {
+      if (type === "search_true") {
+        setIsSearchFasilities(true);
+        return;
+      }
+
+      if (type === "search_false") {
+        Keyboard.dismiss();
+        setIsSearchFasilities(false);
+        return;
+      }
+    },
+    [setIsSearchFasilities]
+  );
+
+  const onSearchFacilities = useCallback(
+    (value: string) => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+
+      debounceRef.current = setTimeout(() => {
+        setSearchFasilities(value);
+        refetchFasilities();
+      }, 300);
+    },
+    [refetchFasilities, setSearchFasilities]
   );
 
   return (
@@ -34,12 +74,27 @@ const Home = () => {
 
       <View style={styles.container}>
         <View style={styles.headerView}>
-          <InputSearch placeholder={"Search fasilities"} />
-
-          <ButtonIcon
-            icon={"profile"}
-            onPress={() => router.navigate("/(root)/Profile")}
+          <InputSearch
+            placeholder={"Search fasilities"}
+            defaultValue={searchFasilities}
+            onChangeText={onSearchFacilities}
+            onFocus={() => handleSearchFacilities("search_true")}
+            onBlur={() => handleSearchFacilities("search_false")}
           />
+
+          {!isSearchFasilities && (
+            <ButtonIcon
+              icon={"profile"}
+              onPress={() => router.navigate("/(root)/Profile")}
+            />
+          )}
+
+          {isSearchFasilities && (
+            <ButtonIcon
+              icon={"cancel_search"}
+              onPress={() => handleSearchFacilities("search_false")}
+            />
+          )}
         </View>
 
         <Gap height={10} />
@@ -54,6 +109,7 @@ const Home = () => {
           ListHeaderComponent={() => (
             <CardHeaderFasilities name={dataUser?.name} />
           )}
+          ListEmptyComponent={loadingFacilities ? null : <NoData />}
         />
       </View>
     </SafeAreaView>

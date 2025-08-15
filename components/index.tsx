@@ -6,6 +6,7 @@ import Gap from "./Gap";
 import Header from "./Header";
 import InputSearch from "./InputSearch";
 import InputText from "./InputText";
+import NoData from "./NoData";
 import TitleContent from "./TitleContent";
 
 export {
@@ -17,5 +18,6 @@ export {
   Header,
   InputSearch,
   InputText,
+  NoData,
   TitleContent,
 };

@@ -70,6 +70,12 @@ const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
             <ChevronRightIcon size={24} color={"#393E46"} />
           </View>
         );
+      case "cancel_search":
+        return (
+          <View style={styles.contentCancel}>
+            <Text style={styles.titleCancel}>Cancel</Text>
+          </View>
+        );
 
       default:
         return null;
@@ -117,6 +123,15 @@ const styles = StyleSheet.create({
   titleProfileView: {
     fontSize: 14,
     fontFamily: "Poppins-Medium",
+    color: "#393E46",
+  },
+  contentCancel: {
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+  },
+  titleCancel: {
+    fontSize: 14,
+    fontFamily: "Poppins-Regular",
     color: "#393E46",
   },
 });

@@ -1,4 +1,5 @@
 import { fetchAPIAxios } from "@/lib";
+import { useFasilitiesStore } from "@/store";
 import { apiUrl } from "@/utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
@@ -11,6 +12,7 @@ export const useGetFacilities = <T = any>() => {
     setLoading(true);
 
     try {
+      const { searchFasilities } = useFasilitiesStore?.getState();
       const token = await AsyncStorage.getItem("token");
       const response = await fetchAPIAxios(`${apiUrl}/facilities`, {
         method: "get",
@@ -19,7 +21,7 @@ export const useGetFacilities = <T = any>() => {
           Authorization: `Bearer ${token}`,
         },
         params: {
-          search: "",
+          search: searchFasilities,
         },
       });
 
