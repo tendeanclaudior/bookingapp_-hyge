@@ -1,7 +1,12 @@
 import { ButtonIconProps } from "@/types/components";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { ArrowLeftIcon } from "react-native-heroicons/outline";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ArrowLeftIcon,
+  ArrowRightStartOnRectangleIcon,
+  ChevronRightIcon,
+  UserCircleIcon,
+} from "react-native-heroicons/outline";
 import { EyeIcon, EyeSlashIcon, UserIcon } from "react-native-heroicons/solid";
 
 const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
@@ -31,6 +36,28 @@ const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
             <UserIcon size={20} color={"#FFFFFF"} />
           </View>
         );
+      case "edit_profile":
+        return (
+          <View style={styles.contentProfile}>
+            <View style={styles.contentProfileView}>
+              <UserCircleIcon size={24} color={"#393E46"} />
+              <Text style={styles.titleProfileView}>Edit profile</Text>
+            </View>
+
+            <ChevronRightIcon size={24} color={"#393E46"} />
+          </View>
+        );
+      case "logout":
+        return (
+          <View style={styles.contentProfile}>
+            <View style={styles.contentProfileView}>
+              <ArrowRightStartOnRectangleIcon size={24} color={"#393E46"} />
+              <Text style={styles.titleProfileView}>Logout</Text>
+            </View>
+
+            <ChevronRightIcon size={24} color={"#393E46"} />
+          </View>
+        );
 
       default:
         return null;
@@ -54,11 +81,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   profileView: {
-    backgroundColor: "#14151A",
+    backgroundColor: "#2D2E30",
     width: 30,
     height: 30,
     borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",
+  },
+  contentProfile: {
+    backgroundColor: "#F6F6F6",
+    padding: 10,
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+  contentProfileView: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  titleProfileView: {
+    fontSize: 16,
+    fontFamily: "Poppins-Medium",
+    color: "#393E46",
   },
 });

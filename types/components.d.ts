@@ -21,3 +21,8 @@ declare interface ButtonIconProps {
   onPress: () => void;
   disabled?: boolean;
 }
+
+declare interface HeaderProps {
+  globalHeader: boolean;
+  titleGlobal?: string;
+}
