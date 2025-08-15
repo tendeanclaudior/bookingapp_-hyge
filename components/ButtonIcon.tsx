@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   titleProfileView: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "Poppins-Medium",
     color: "#393E46",
   },

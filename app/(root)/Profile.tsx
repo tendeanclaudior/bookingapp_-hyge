@@ -1,8 +1,26 @@
+import { logout } from "@/apis";
 import { ButtonIcon, Header } from "@/components";
-import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import React, { useCallback } from "react";
+import {
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 
 const Profile = () => {
+  const handleLogout = useCallback(() => {
+    Alert.alert("Logout", "Are you sure to log out your account?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => logout() },
+    ]);
+  }, []);
+
   return (
     <SafeAreaView style={styles.page}>
       <Header globalHeader={true} titleGlobal={"Profile"} />
@@ -11,7 +29,7 @@ const Profile = () => {
         <View style={styles.container}>
           <ButtonIcon icon={"edit_profile"} onPress={() => null} />
 
-          <ButtonIcon icon={"logout"} onPress={() => null} />
+          <ButtonIcon icon={"logout"} onPress={() => handleLogout()} />
         </View>
       </ScrollView>
     </SafeAreaView>

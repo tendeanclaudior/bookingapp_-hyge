@@ -54,3 +54,24 @@ export const signIn = async (data: SignInSchemaType) => {
     Alert.alert("Error", error?.message);
   }
 };
+
+export const logout = async () => {
+  try {
+    const response = await fetchAPIAxios(`${apiUrl}/auth/logout`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response?.message === "Logged out successfully") {
+      router.replace("/(auth)/signin");
+
+      await AsyncStorage.multiRemove(["token"]);
+    } else {
+      Alert.alert(response?.message);
+    }
+  } catch (error: any) {
+    Alert.alert("Error", error?.message);
+  }
+};
