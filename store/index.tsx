@@ -5,4 +5,7 @@ export const useFasilitiesStore = create<FacilitiesProps>((set) => ({
   setSearchFasilities: (value) => set({ searchFasilities: value }),
   isSearchFasilities: false,
   setIsSearchFasilities: (value) => set({ isSearchFasilities: value }),
+  dateAvailabilityFacilities: "",
+  setDateAvailabilityFacilities: (value) =>
+    set({ dateAvailabilityFacilities: value }),
 }));

@@ -104,7 +104,15 @@ const Home = () => {
           keyExtractor={(item, index) => `${item?.id}_${index}`}
           contentContainerStyle={{ paddingVertical: 10 }}
           renderItem={({ item }) => (
-            <CardFasilities item={item} onPress={() => console.log("")} />
+            <CardFasilities
+              item={item}
+              onPress={() =>
+                router.push({
+                  pathname: "/(root)/DetailFacility",
+                  params: { id: String(item?.id) },
+                })
+              }
+            />
           )}
           ListHeaderComponent={() => (
             <CardHeaderFasilities name={dataUser?.name} />

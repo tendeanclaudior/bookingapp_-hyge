@@ -3,4 +3,6 @@ declare interface FacilitiesProps {
   setSearchFasilities: (value: string) => void;
   isSearchFasilities: boolean;
   setIsSearchFasilities: (value: boolean) => void;
+  dateAvailabilityFacilities: string;
+  setDateAvailabilityFacilities: (value: string) => void;
 }

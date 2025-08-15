@@ -1,7 +1,9 @@
 import Button from "./Button";
 import ButtonIcon from "./ButtonIcon";
+import CardAvailabilFacilities from "./CardAvailabilFacilities";
 import CardFasilities from "./CardFasilities";
 import CardHeaderFasilities from "./CardHeaderFasilities";
+import DatePickerHorizontal from "./DatePickerHorizontal";
 import Gap from "./Gap";
 import Header from "./Header";
 import InputSearch from "./InputSearch";
@@ -12,8 +14,10 @@ import TitleContent from "./TitleContent";
 export {
   Button,
   ButtonIcon,
+  CardAvailabilFacilities,
   CardFasilities,
   CardHeaderFasilities,
+  DatePickerHorizontal,
   Gap,
   Header,
   InputSearch,

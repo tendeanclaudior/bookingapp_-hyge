@@ -20,6 +20,10 @@ const Layout = () => {
         name="ChangePassword"
         options={{ headerShown: false, gestureEnabled: false }}
       />
+      <Stack.Screen
+        name="DetailFacility"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
     </Stack>
   );
 };

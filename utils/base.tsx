@@ -7,3 +7,10 @@ export const sliceTitleView = (value: string, length: number) => {
     return value?.length > length ? `${value?.slice(0, length)}...` : value;
   }
 };
+
+export const formattedDateToday = (() => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  return tomorrow.toISOString().split("T")[0];
+})();
