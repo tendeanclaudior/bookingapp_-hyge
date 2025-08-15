@@ -4,14 +4,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const getRefreshToken = async () => {
   try {
-    const token = await AsyncStorage.getItem("token");
+    const refreshToken = await AsyncStorage.getItem("refreshToken");
     const response = await fetchAPIAxios(`${apiUrl}/auth/refresh`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       data: {
-        refreshToken: token,
+        refreshToken: refreshToken,
       },
     });
 
