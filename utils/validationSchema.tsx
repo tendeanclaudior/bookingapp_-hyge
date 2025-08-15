@@ -29,3 +29,18 @@ export const updateProfileSchema = z.object({
 });
 
 export type UpdateProfileSchemaType = z.infer<typeof updateProfileSchema>;
+
+export const changePasswordSchema = z.object({
+  current_password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+  new_password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+});
+
+export type ChangePasswordSchemaType = z.infer<typeof changePasswordSchema>;

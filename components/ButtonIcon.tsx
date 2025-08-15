@@ -5,6 +5,7 @@ import {
   ArrowLeftIcon,
   ArrowRightStartOnRectangleIcon,
   ChevronRightIcon,
+  Cog6ToothIcon,
   UserCircleIcon,
 } from "react-native-heroicons/outline";
 import { EyeIcon, EyeSlashIcon, UserIcon } from "react-native-heroicons/solid";
@@ -53,6 +54,17 @@ const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
             <View style={styles.contentProfileView}>
               <ArrowRightStartOnRectangleIcon size={24} color={"#393E46"} />
               <Text style={styles.titleProfileView}>Logout</Text>
+            </View>
+
+            <ChevronRightIcon size={24} color={"#393E46"} />
+          </View>
+        );
+      case "change_password":
+        return (
+          <View style={styles.contentProfile}>
+            <View style={styles.contentProfileView}>
+              <Cog6ToothIcon size={24} color={"#393E46"} />
+              <Text style={styles.titleProfileView}>Change Password</Text>
             </View>
 
             <ChevronRightIcon size={24} color={"#393E46"} />

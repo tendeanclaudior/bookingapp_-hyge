@@ -13,6 +13,16 @@ import {
 
 const Profile = () => {
   const handleProfileContent = useCallback((type: string) => {
+    if (type === "edit_profile") {
+      router.navigate("/(root)/EditProfile");
+      return;
+    }
+
+    if (type === "change_password") {
+      router.navigate("/(root)/ChangePassword");
+      return;
+    }
+
     if (type === "logout") {
       Alert.alert("Logout", "Are you sure to log out your account?", [
         {
@@ -22,11 +32,6 @@ const Profile = () => {
         },
         { text: "OK", onPress: () => logout() },
       ]);
-      return;
-    }
-
-    if (type === "edit_profile") {
-      router.navigate("/(root)/EditProfile");
       return;
     }
   }, []);
@@ -41,6 +46,11 @@ const Profile = () => {
           <ButtonIcon
             icon={"edit_profile"}
             onPress={() => handleProfileContent("edit_profile")}
+          />
+
+          <ButtonIcon
+            icon={"change_password"}
+            onPress={() => handleProfileContent("change_password")}
           />
 
           <ButtonIcon

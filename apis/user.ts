@@ -1,5 +1,9 @@
 import { fetchAPIAxios } from "@/lib";
-import { apiUrl, UpdateProfileSchemaType } from "@/utils";
+import {
+  apiUrl,
+  ChangePasswordSchemaType,
+  UpdateProfileSchemaType,
+} from "@/utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
@@ -56,7 +60,36 @@ export const updateProfile = async (data: UpdateProfileSchemaType) => {
     if (response?.message === "Profile updated successfully") {
       Alert.alert("Update Profile", response?.message);
     } else {
-      Alert.alert("Update Profile", response?.message);
+      Alert.alert("Update Profile", response?.data?.message);
+    }
+  } catch (error: any) {
+    Alert.alert("Error", error?.message);
+  }
+};
+
+export const changePassword = async (
+  data: ChangePasswordSchemaType,
+  reset: (values: { current_password: string; new_password: string }) => void
+) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    const response = await fetchAPIAxios(`${apiUrl}/auth/profile`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        currentPassword: data?.current_password,
+        newPassword: data?.new_password,
+      },
+    });
+
+    if (response?.message === "Profile updated successfully") {
+      Alert.alert("Change Password", response?.message);
+      reset({ current_password: "", new_password: "" });
+    } else {
+      Alert.alert("Change Password", response?.data?.message);
     }
   } catch (error: any) {
     Alert.alert("Error", error?.message);

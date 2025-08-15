@@ -21,7 +21,7 @@ export const signUp = async (data: SignUpSchemaType) => {
     if (response?.message === "User registered successfully") {
       await AsyncStorage.setItem("token", response?.accessToken);
 
-      router.push("/(root)/(tabs)/Home");
+      router.replace("/(root)/(tabs)/Home");
     } else {
       Alert.alert(response?.data?.error, response?.data?.message);
     }
@@ -46,7 +46,7 @@ export const signIn = async (data: SignInSchemaType) => {
     if (response?.message === "Login successful") {
       await AsyncStorage.setItem("token", response?.accessToken);
 
-      router.push("/(root)/(tabs)/Home");
+      router.replace("/(root)/(tabs)/Home");
     } else {
       Alert.alert(response?.data?.error, response?.data?.message);
     }

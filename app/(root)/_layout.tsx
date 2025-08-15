@@ -16,6 +16,10 @@ const Layout = () => {
         name="EditProfile"
         options={{ headerShown: false, gestureEnabled: false }}
       />
+      <Stack.Screen
+        name="ChangePassword"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
     </Stack>
   );
 };
