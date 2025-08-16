@@ -27,6 +27,7 @@ declare interface ButtonIconProps {
 declare interface HeaderProps {
   mainHeader?: boolean;
   titleMain?: string;
+  mainAscDesc?: boolean;
   globalHeader: boolean;
   titleGlobal?: string;
   onPress?: () => void;
@@ -50,4 +51,18 @@ declare interface DropdownProps {
 declare interface DatePickerProps {
   visible: boolean;
   onSelect: (date: Date) => void;
+}
+
+declare interface TabButtonProps {
+  data: any[];
+  selectedIndex: number;
+  onPress?: (value: any, index: number) => void;
+}
+
+declare interface CardBookingProps {
+  id?: number;
+  status: string;
+  bookingDate: string;
+  createdAt: string;
+  notes: string;
 }

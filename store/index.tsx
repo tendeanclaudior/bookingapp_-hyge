@@ -22,3 +22,14 @@ export const useCreateBookingStore = create<CreateBookingProps>((set) => ({
       isBookingAvailabilityId: "",
     })),
 }));
+
+export const useBookingStore = create<BookingProps>((set) => ({
+  pageBooking: 1,
+  setPageBooking: (value) => set({ pageBooking: value }),
+  selectedTabIndex: 0,
+  setSelectedIndex: (value) => set({ selectedTabIndex: value }),
+  selectedTabType: "",
+  setSelectedTabType: (value) => set({ selectedTabType: value }),
+  selectedByAscDesc: "asc",
+  setSelectedByAscDesc: (value) => set({ selectedByAscDesc: value }),
+}));

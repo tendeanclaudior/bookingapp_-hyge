@@ -7,3 +7,9 @@ export const sliceTitleView = (value: string, length: number) => {
     return value?.length > length ? `${value?.slice(0, length)}...` : value;
   }
 };
+
+export const dataTabBookingList = [
+  { value: "All", key: "" },
+  { value: "Booked", key: "booked" },
+  { value: "Cancelled", key: "cancelled" },
+];

@@ -7,6 +7,7 @@ import ButtonIcon from "./ButtonIcon";
 const Header = ({
   mainHeader,
   titleMain,
+  mainAscDesc,
   globalHeader,
   titleGlobal,
   onPress,
@@ -24,6 +25,10 @@ const Header = ({
     <>
       {mainHeader && (
         <View style={styles.headerMainView}>
+          {mainAscDesc && (
+            <ButtonIcon icon={"asc_desc"} onPress={() => handleBack()} />
+          )}
+
           <View style={styles.titleMainView}>
             <Text style={styles.titleMain}>{titleMain}</Text>
           </View>
@@ -47,11 +52,18 @@ export default memo(Header);
 
 const styles = StyleSheet.create({
   headerMainView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 5,
   },
   titleMainView: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
     alignItems: "center",
     justifyContent: "center",
   },

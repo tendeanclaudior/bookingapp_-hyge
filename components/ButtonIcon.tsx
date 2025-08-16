@@ -1,3 +1,4 @@
+import { useBookingStore } from "@/store";
 import { ButtonIconProps } from "@/types/components";
 import React, { memo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -8,9 +9,17 @@ import {
   Cog6ToothIcon,
   UserCircleIcon,
 } from "react-native-heroicons/outline";
-import { EyeIcon, EyeSlashIcon, UserIcon } from "react-native-heroicons/solid";
+import {
+  ChevronDoubleDownIcon,
+  ChevronDoubleUpIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  UserIcon,
+} from "react-native-heroicons/solid";
 
 const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
+  const { selectedByAscDesc } = useBookingStore();
+
   const Icon = () => {
     switch (icon) {
       case "eye":
@@ -76,6 +85,20 @@ const ButtonIcon = ({ icon, onPress, disabled }: ButtonIconProps) => {
             <Text style={styles.titleCancel}>Cancel</Text>
           </View>
         );
+      case "asc_desc":
+        return (
+          <View style={styles.contentAscDesc}>
+            {selectedByAscDesc === "asc" ? (
+              <ChevronDoubleUpIcon size={20} color={"#393E46"} />
+            ) : (
+              <ChevronDoubleDownIcon size={20} color={"#393E46"} />
+            )}
+
+            <Text style={styles.titlecontentAscDesc}>
+              {selectedByAscDesc === "asc" ? "Ascending" : "Descending"}
+            </Text>
+          </View>
+        );
 
       default:
         return null;
@@ -130,6 +153,18 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   titleCancel: {
+    fontSize: 14,
+    fontFamily: "Poppins-Regular",
+    color: "#393E46",
+  },
+  contentAscDesc: {
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2.5,
+  },
+  titlecontentAscDesc: {
     fontSize: 14,
     fontFamily: "Poppins-Regular",
     color: "#393E46",
