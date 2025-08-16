@@ -44,3 +44,18 @@ export const changePasswordSchema = z.object({
 });
 
 export type ChangePasswordSchemaType = z.infer<typeof changePasswordSchema>;
+
+export const createBookingSchema = z.object({
+  facility: z.object({
+    id: z.string().min(1, "Facility ID required"),
+    name: z.string().min(1, "Facility name required"),
+  }),
+  booking_date: z.string().nonempty("Booking Date is required"),
+  available_slots: z.object({
+    hour: z.string().min(1, "Slot ID required"),
+    startTime: z.string().min(1, "Slot startTime required"),
+  }),
+  notes: z.string().optional(),
+});
+
+export type CreateBookingSchemaType = z.infer<typeof createBookingSchema>;

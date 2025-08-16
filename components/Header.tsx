@@ -1,6 +1,6 @@
 import { HeaderProps } from "@/types/components";
 import { router } from "expo-router";
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ButtonIcon from "./ButtonIcon";
 
@@ -9,7 +9,17 @@ const Header = ({
   titleMain,
   globalHeader,
   titleGlobal,
+  onPress,
 }: HeaderProps) => {
+  const handleBack = useCallback(() => {
+    if (onPress) {
+      onPress();
+      return;
+    }
+
+    router.back();
+  }, [onPress]);
+
   return (
     <>
       {mainHeader && (
@@ -22,7 +32,7 @@ const Header = ({
 
       {globalHeader && (
         <View style={styles.headerGlobalView}>
-          <ButtonIcon icon={"back"} onPress={() => router.back()} />
+          <ButtonIcon icon={"back"} onPress={() => handleBack()} />
 
           <View style={styles.titleGlobalView}>
             <Text style={styles.titleGlobal}>{titleGlobal}</Text>

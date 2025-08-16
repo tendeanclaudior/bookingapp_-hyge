@@ -7,7 +7,7 @@ import {
   InputSearch,
   NoData,
 } from "@/components";
-import { useFasilitiesStore } from "@/store";
+import { useCreateBookingStore, useFasilitiesStore } from "@/store";
 import { router, useFocusEffect } from "expo-router";
 import React, { useCallback, useRef } from "react";
 import {
@@ -32,6 +32,7 @@ const Home = () => {
     isSearchFasilities,
     setIsSearchFasilities,
   } = useFasilitiesStore();
+  const { setIsBookingAvailabilityId } = useCreateBookingStore();
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useFocusEffect(
@@ -66,6 +67,17 @@ const Home = () => {
       }, 300);
     },
     [refetchFasilities, setSearchFasilities]
+  );
+
+  const goToDetailFasilities = useCallback(
+    (item: any) => {
+      router.push({
+        pathname: "/(root)/DetailFacility",
+        params: { id: String(item?.id) },
+      });
+      setIsBookingAvailabilityId(item?.id);
+    },
+    [setIsBookingAvailabilityId]
   );
 
   return (
@@ -106,12 +118,7 @@ const Home = () => {
           renderItem={({ item }) => (
             <CardFasilities
               item={item}
-              onPress={() =>
-                router.push({
-                  pathname: "/(root)/DetailFacility",
-                  params: { id: String(item?.id) },
-                })
-              }
+              onPress={() => goToDetailFasilities(item)}
             />
           )}
           ListHeaderComponent={() => (

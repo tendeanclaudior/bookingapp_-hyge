@@ -10,12 +10,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { ChevronDownIcon } from "react-native-heroicons/outline";
 import ButtonIcon from "./ButtonIcon";
 import Gap from "./Gap";
 
 const InputText = ({
   label,
   secureTextEntry,
+  dropdown,
+  multiline,
   error,
   errorMessage,
   ...props
@@ -52,11 +55,16 @@ const InputText = ({
           >
             <View style={styles.contentInput}>
               <TextInput
-                style={styles.inputContent}
+                style={[
+                  styles.inputContent,
+                  { paddingBottom: multiline ? 80 : 0 },
+                ]}
                 placeholderTextColor={"#AAAAAA"}
                 secureTextEntry={secureTextEntry ? securePassword : false}
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
+                multiline={multiline}
+                returnKeyType={"done"}
                 {...props}
               />
 
@@ -75,6 +83,8 @@ const InputText = ({
                   )}
                 </>
               )}
+
+              {dropdown && <ChevronDownIcon size={24} color={"#393E46"} />}
             </View>
           </View>
 

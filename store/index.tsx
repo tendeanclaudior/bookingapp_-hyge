@@ -9,3 +9,16 @@ export const useFasilitiesStore = create<FacilitiesProps>((set) => ({
   setDateAvailabilityFacilities: (value) =>
     set({ dateAvailabilityFacilities: value }),
 }));
+
+export const useCreateBookingStore = create<CreateBookingProps>((set) => ({
+  isBookingDate: false,
+  setIsBookingDate: (value) => set({ isBookingDate: value }),
+  isBookingAvailabilityId: "",
+  setIsBookingAvailabilityId: (value) =>
+    set({ isBookingAvailabilityId: value }),
+  resetCreateBooking: () =>
+    set(() => ({
+      isBookingDate: false,
+      isBookingAvailabilityId: "",
+    })),
+}));

@@ -6,3 +6,11 @@ declare interface FacilitiesProps {
   dateAvailabilityFacilities: string;
   setDateAvailabilityFacilities: (value: string) => void;
 }
+
+declare interface CreateBookingProps {
+  isBookingDate: boolean;
+  setIsBookingDate: (value: boolean) => void;
+  isBookingAvailabilityId: string;
+  setIsBookingAvailabilityId: (value: string) => void;
+  resetCreateBooking?: any;
+}

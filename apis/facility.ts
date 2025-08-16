@@ -1,7 +1,8 @@
 import { fetchAPIAxios } from "@/lib";
-import { useFasilitiesStore } from "@/store";
-import { apiUrl, formattedDateToday } from "@/utils";
+import { useCreateBookingStore, useFasilitiesStore } from "@/store";
+import { apiUrl } from "@/utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import dayjs from "dayjs";
 import { useCallback, useEffect, useState } from "react";
 
 export const useGetFacilities = <T = any>() => {
@@ -79,18 +80,25 @@ export const useGetDetailFacilities = <T = any>(id: string) => {
   return { data, loading, refetch: fetchData };
 };
 
-export const useGetAvailabilityFacilities = <T = any>(id: string) => {
+export const useGetAvailabilityFacilities = <T = any>() => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
+  const { isBookingAvailabilityId } = useCreateBookingStore?.getState();
 
   const fetchData = useCallback(async () => {
+    if (!isBookingAvailabilityId) return;
     setLoading(true);
 
     try {
       const { dateAvailabilityFacilities } = useFasilitiesStore?.getState();
+      const formattedDateToday = dayjs(new Date())
+        .locale("id")
+        .format("YYYY-MM-DD");
       const token = await AsyncStorage.getItem("token");
       const response = await fetchAPIAxios(
-        `${apiUrl}/facilities/${parseFloat(id)}/availability/daily`,
+        `${apiUrl}/facilities/${parseFloat(
+          isBookingAvailabilityId
+        )}/availability/daily`,
         {
           method: "get",
           headers: {
@@ -111,7 +119,7 @@ export const useGetAvailabilityFacilities = <T = any>(id: string) => {
 
       throw err;
     }
-  }, [id]);
+  }, [isBookingAvailabilityId]);
 
   useEffect(() => {
     fetchData();

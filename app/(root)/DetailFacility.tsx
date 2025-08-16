@@ -5,8 +5,8 @@ import {
   Gap,
   Header,
 } from "@/components";
-import { useFasilitiesStore } from "@/store";
-import { useLocalSearchParams } from "expo-router";
+import { useCreateBookingStore, useFasilitiesStore } from "@/store";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback } from "react";
 import {
   Dimensions,
@@ -28,8 +28,15 @@ const DetailFacility = () => {
   const { data: dataDetailFacilities, loading: loadingDetailFacilities } =
     useGetDetailFacilities<DetailFasilitiesProps | null>(id);
   const { data: dataAvailabilFacilities, refetch: refetchAvailabilFacilities } =
-    useGetAvailabilityFacilities<AvailabilFasilitiesProps | null>(id);
+    useGetAvailabilityFacilities<AvailabilFasilitiesProps | null>();
   const { setDateAvailabilityFacilities } = useFasilitiesStore();
+  const { resetCreateBooking } = useCreateBookingStore();
+
+  const onBack = useCallback(() => {
+    router.back();
+    resetCreateBooking();
+    setDateAvailabilityFacilities("");
+  }, [resetCreateBooking, setDateAvailabilityFacilities]);
 
   const handleDateSelect = useCallback(
     (date: string) => {
@@ -53,7 +60,11 @@ const DetailFacility = () => {
       ]}
     >
       <StatusBar barStyle={"dark-content"} />
-      <Header globalHeader={true} titleGlobal={"Detail Facility"} />
+      <Header
+        globalHeader={true}
+        titleGlobal={"Detail Facility"}
+        onPress={() => onBack()}
+      />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {!loadingDetailFacilities && (
